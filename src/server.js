@@ -65,13 +65,20 @@ dotenv.config();
 const PORT = process.env.DB_PORT;
 
 
-// Enable CORS for requests from localhost:5173
-app.use(cors({
-  origin: 'http://localhost:5173',  // Allow only your frontend to access the API
-  methods: 'GET, POST, PUT, DELETE',  // Specify allowed HTTP methods
-  credentials: true,  // Allow cookies or authorization headers
-}));
+// // Enable CORS for requests from localhost:5173
+// app.use(cors({
+//   origin: '*',  // Allow only your frontend to access the API
+//   methods: 'GET, POST, PUT, DELETE',  // Specify allowed HTTP methods
+//   credentials: true,  // Allow cookies or authorization headers
+// }));
 
+app.use(cors({
+  origin: function (origin, callback) {
+    callback(null, origin); // Reflect the origin
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
