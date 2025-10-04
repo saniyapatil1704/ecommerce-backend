@@ -73,11 +73,9 @@ const PORT = process.env.DB_PORT;
 // }));
 
 app.use(cors({
-  origin: function (origin, callback) {
-    callback(null, origin); // Reflect the origin
-  },
+  origin: '*', // Allow all origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
